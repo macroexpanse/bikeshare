@@ -5,4 +5,5 @@ Sequel::Model.plugin :json_serializer
 
 DB.create_table :bikes do
   primary_key :id
+  TrueClass :available
 end
