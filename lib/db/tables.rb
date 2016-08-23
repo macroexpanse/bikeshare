@@ -6,7 +6,12 @@ Sequel::Model.plugin :json_serializer
 DB.create_table :bikes do
   primary_key :id
   TrueClass :available
+  Integer :last_member_id
   Integer :station_id
+end
+
+DB.create_table :members do
+  primary_key :id
 end
 
 DB.create_table :stations do
