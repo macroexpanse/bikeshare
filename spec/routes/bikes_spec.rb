@@ -23,15 +23,7 @@ describe 'Bike routes' do
     end
 
     it 'gets bike by id' do
-      expect(parsed_response_body['id']).to eq(bike.id)
-    end
-
-    it 'includes station' do
-      expect(parsed_response_body['station_id']).to eq(station.id)
-    end
-
-    it 'includes last member' do
-      expect(parsed_response_body['last_member_id']).to eq(member.id)
+      expect(parsed_response_body).to eq(bike.values)
     end
   end
 end

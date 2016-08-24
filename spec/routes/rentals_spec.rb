@@ -41,7 +41,7 @@ describe 'Rental routes' do
       it 'returns a new rental' do
         send_request
 
-        expect(parsed_response_body).to include('id')
+        expect(parsed_response_body).to include(:id)
       end
 
       it 'makes the bike unavailable' do
@@ -65,15 +65,13 @@ describe 'Rental routes' do
       it 'returns an error message' do
         send_request
 
-        expect(parsed_response_body).to include('error')
+        expect(parsed_response_body).to include(:error)
       end
 
       it 'is not updated' do
-        bike_attrs = bike.to_hash
-
         send_request
 
-        expect(bike.reload.to_hash).to eq(bike_attrs)
+        expect(bike).to eq(bike.reload)
       end
     end
 
@@ -143,7 +141,7 @@ describe 'Rental routes' do
       it 'returns the rental in the response' do
         send_request
 
-        expect(parsed_response_body['id']).to eq(rental.id)
+        expect(parsed_response_body).to eq(rental.reload.values)
       end
     end
 
@@ -156,7 +154,7 @@ describe 'Rental routes' do
       it 'returns an error message' do
         send_request
 
-        expect(parsed_response_body).to include('error')
+        expect(parsed_response_body).to include(:error)
       end
     end
 
@@ -168,7 +166,7 @@ describe 'Rental routes' do
       it 'returns an error message' do
         send_request
 
-        expect(parsed_response_body).to include('error')
+        expect(parsed_response_body).to include(:error)
       end
 
       it 'does not update rental' do
