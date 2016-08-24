@@ -19,10 +19,10 @@ describe 'Bike model' do
   end
 
   it 'has a station' do
-    expect(bike.station.id).to eq(station.id)
+    expect(bike.station).to eq(station)
   end
 
   it 'has a last member' do
-    expect(bike.last_member.id).to eq(member.id)
+    expect(bike.last_member).to eq(member)
   end
 end

@@ -15,6 +15,15 @@ DB.create_table :members do
   primary_key :id
 end
 
+DB.create_table :rentals do
+  primary_key :id
+  Integer :bike_id
+  Integer :member_id
+  Integer :rent_station_id
+  Integer :return_station_id
+end
+
 DB.create_table :stations do
   primary_key :id
+  Integer :max_capacity, default: 20
 end
