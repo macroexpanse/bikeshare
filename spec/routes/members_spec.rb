@@ -88,4 +88,64 @@ describe 'Member routes' do
       end
     end
   end
+
+  describe "PUT /members/:member_id/account/enable" do
+    context 'valid member id' do
+      def send_request
+        put "/members/#{member.id}/account/enable"
+      end
+
+      it 'returns success' do
+        send_request
+
+        expect(last_response.status).to eq(200)
+      end
+
+      it "updates the member's account status" do
+        member.update(account: 'disabled')
+
+        send_request
+
+        expect(member.reload.account).to eq('enabled')
+      end
+    end
+
+    context 'invalid member id' do
+      it 'returns not found' do
+        put "/members/#{member.id + 1}/account/enable"
+
+        expect(last_response.status).to eq(404)
+      end
+    end
+  end
+
+  describe "PUT /members/:member_id/account/disable" do
+    context 'valid member id' do
+      def send_request
+        put "/members/#{member.id}/account/disable"
+      end
+
+      it 'returns success' do
+        send_request
+
+        expect(last_response.status).to eq(200)
+      end
+
+      it "updates the member's account status" do
+        member.update(account: 'enabled')
+
+        send_request
+
+        expect(member.reload.account).to eq('disabled')
+      end
+    end
+
+    context 'invalid member id' do
+      it 'returns not found' do
+        put "/members/#{member.id + 1}/account/disable"
+
+        expect(last_response.status).to eq(404)
+      end
+    end
+  end
 end

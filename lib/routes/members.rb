@@ -17,6 +17,14 @@ module Routing
       app.get '/members/:id/current_ride' do
         @member.to_json(include: :current_ride)
       end
+
+      app.put '/members/:id/account/enable' do
+        json @member.update(account: 'enabled')
+      end
+
+      app.put '/members/:id/account/disable' do
+        json @member.update(account: 'disabled')
+      end
     end
   end
 end

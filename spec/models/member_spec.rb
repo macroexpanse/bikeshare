@@ -19,6 +19,10 @@ describe 'Member model' do
     expect(member.returned_rentals.all).to eq([returned_rental])
   end
 
+  it 'has an account status defaulted to enabled' do
+    expect(member.account).to eq('enabled')
+  end
+
   describe '#rides' do
     it 'has 0 if there are no rentals' do
       expect(member.rides).to eq(0)

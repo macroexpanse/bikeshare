@@ -13,6 +13,7 @@ end
 
 DB.create_table :members do
   primary_key :id
+  String :account, default: 'enabled'
 end
 
 DB.create_table :rentals do
