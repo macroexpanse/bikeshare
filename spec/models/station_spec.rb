@@ -3,7 +3,7 @@ require 'spec_helper'
 require_relative '../../lib/models/station'
 
 describe 'Station model' do
-  let(:station) { Station.create(capacity: 10) }
+  let(:station) { Station.create(capacity: 10, name: 'Classon Avenue') }
   let!(:bikes) { [ Bike.create(station_id: station.id) ] }
 
   it 'has a capacity' do
@@ -16,5 +16,9 @@ describe 'Station model' do
 
   it 'has bikes' do
     expect(station.bikes).to eq(bikes)
+  end
+
+  it 'has a name' do
+    expect(station.name).to eq('Classon Avenue')
   end
 end

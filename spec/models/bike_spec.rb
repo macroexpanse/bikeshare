@@ -8,13 +8,12 @@ describe 'Bike model' do
   let(:member) { Member.create }
   let(:bike) do
     Bike.create(
-      available: true,
       station_id: station.id,
       last_member_id: member.id
     )
   end
 
-  it 'is available' do
+  it 'is available by default' do
     expect(bike.available).to eq(true)
   end
 

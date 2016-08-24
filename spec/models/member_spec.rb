@@ -4,7 +4,7 @@ require_relative '../../lib/models/member'
 require_relative '../../lib/models/rental'
 
 describe 'Member model' do
-  let(:member) { Member.create }
+  let(:member) { Member.create(name: 'Testy Testerson') }
 
   it 'has rentals' do
     rental = Rental.create(member_id: member.id)
@@ -21,6 +21,10 @@ describe 'Member model' do
 
   it 'has an account status defaulted to enabled' do
     expect(member.account).to eq('enabled')
+  end
+
+  it 'has a name' do
+    expect(member.name).to eq('Testy Testerson')
   end
 
   describe '#rides' do
