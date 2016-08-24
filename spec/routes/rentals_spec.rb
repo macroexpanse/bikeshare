@@ -68,7 +68,33 @@ describe 'Rental routes' do
         expect(parsed_response_body).to include(:error)
       end
 
-      it 'is not updated' do
+      it 'does not create rental' do
+        expect { send_request }.to change { Rental.count }.by(0)
+      end
+
+      it 'does not update bike' do
+        send_request
+
+        expect(bike).to eq(bike.reload)
+      end
+    end
+
+    context 'member account is disabled' do
+      before do
+        new_member.update(account: 'disabled')
+      end
+
+      it 'returns an error message' do
+        send_request
+
+        expect(parsed_response_body).to include(:error)
+      end
+
+      it 'does not create rental' do
+        expect { send_request }.to change { Rental.count }.by(0)
+      end
+
+      it 'does not update bike' do
         send_request
 
         expect(bike).to eq(bike.reload)

@@ -7,7 +7,11 @@ module Routing
         station = Station.find(id: params[:station_id])
         return not_found if bike.nil? || member.nil? || station.nil?
 
-        if bike.available === true
+        if bike.available === false
+          json error: 'This bike is not available.'
+        elsif member.account === 'disabled'
+          json error: 'This member account is disabled.'
+        else
           rental = Rental.create(
             bike_id: bike.id,
             member_id: member.id,
@@ -15,8 +19,6 @@ module Routing
           )
           bike.update(available: false, last_member_id: params[:member_id])
           json rental
-        else
-          json error: 'This bike is not available.'
         end
       end
 
