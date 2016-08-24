@@ -8,6 +8,7 @@ require_relative 'models/member'
 require_relative 'models/rental'
 require_relative 'models/station'
 require_relative 'routes/bikes'
+require_relative 'routes/members'
 require_relative 'routes/rentals'
 require_relative 'routes/stations'
 
@@ -16,6 +17,7 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 
 class Bikeshare < Sinatra::Application
   register Routing::Bikes
+  register Routing::Members
   register Routing::Rentals
   register Routing::Stations
 end
