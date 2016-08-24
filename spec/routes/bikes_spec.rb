@@ -14,16 +14,28 @@ describe 'Bike routes' do
   end
 
   describe 'GET /bikes/:id' do
-    before do
-      get "/bikes/#{bike.id}"
+    context 'valid bike id' do
+      before do
+        get "/bikes/#{bike.id}"
+      end
+
+      it 'is successful' do
+        expect(last_response.status).to eq(200)
+      end
+
+      it 'gets bike by id' do
+        expect(parsed_response_body).to eq(bike.values)
+      end
     end
 
-    it 'is successful' do
-      expect(last_response.status).to eq(200)
-    end
+    context 'invalid bike id' do
+      before do
+        get "/bikes/#{bike.id + 1}"
+      end
 
-    it 'gets bike by id' do
-      expect(parsed_response_body).to eq(bike.values)
+      it 'returns not found' do
+        expect(last_response.status).to eq(404)
+      end
     end
   end
 end
