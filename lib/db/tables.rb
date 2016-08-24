@@ -25,5 +25,5 @@ end
 
 DB.create_table :stations do
   primary_key :id
-  Integer :max_capacity, default: 20
+  Integer :capacity, default: 20
 end

@@ -160,7 +160,7 @@ describe 'Rental routes' do
 
     context 'station is full' do
       before do
-        return_station.update(max_capacity: 0)
+        return_station.update(capacity: 0)
       end
 
       it 'returns an error message' do

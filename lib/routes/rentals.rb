@@ -27,7 +27,7 @@ module Routing
 
         if rental.return_station_id
           json error: 'This rental has already been returned.'
-        elsif station.bikes.count >= station.max_capacity
+        elsif station.bikes.count >= station.capacity
           json error: 'This station is at capacity.'
         else
           rental.update(return_station_id: params[:station_id])
