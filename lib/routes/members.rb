@@ -13,6 +13,10 @@ module Routing
       app.get '/members/:id/rides' do
         @member.to_json(include: :rides)
       end
+
+      app.get '/members/:id/current_ride' do
+        @member.to_json(include: :current_ride)
+      end
     end
   end
 end

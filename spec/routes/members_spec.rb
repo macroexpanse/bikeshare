@@ -59,4 +59,33 @@ describe 'Member routes' do
       end
     end
   end
+
+  describe 'GET /members/:id/current_ride' do
+    context 'valid member id' do
+      it 'returns success' do
+        get "/members/#{member.id}/current_ride"
+
+        expect(last_response.status).to eq(200)
+      end
+
+      it 'returns the current ride' do
+        current_ride = Rental.create(
+          member_id: member.id,
+          rent_station_id: Station.create.id
+        )
+
+        get "/members/#{member.id}/current_ride"
+
+        expect(parsed_response_body[:current_ride]).to eq(current_ride.values)
+      end
+    end
+
+    context 'invalid member id' do
+      it 'returns not found' do
+        get "/members/#{member.id + 1}/current_ride"
+
+        expect(last_response.status).to eq(404)
+      end
+    end
+  end
 end

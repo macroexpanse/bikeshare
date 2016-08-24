@@ -12,4 +12,8 @@ class Member < Sequel::Model
   def rides
     returned_rentals.count
   end
+
+  def current_ride
+    Rental.find(member_id: id, return_station_id: nil)
+  end
 end

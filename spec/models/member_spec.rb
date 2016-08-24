@@ -40,4 +40,27 @@ describe 'Member model' do
       expect(member.rides).to eq(2)
     end
   end
+
+  describe "#current_ride" do
+    it 'has a current ride if a rental has not been returned' do
+      current_ride = Rental.create(member_id: member.id, rent_station_id: Station.create.id)
+
+      expect(member.current_ride).to eq(current_ride)
+    end
+
+    it 'does not have a current ride if no rentals' do
+      expect(member.current_ride).to eq(nil)
+    end
+
+    it 'does not have a current ride if all rentals have been returned' do
+      station = Station.create
+      current_ride = Rental.create(
+        member_id: member.id,
+        rent_station_id: station.id,
+        return_station_id: station.id
+      )
+
+      expect(member.current_ride).to eq(nil)
+    end
+  end
 end
